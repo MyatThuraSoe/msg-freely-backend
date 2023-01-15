@@ -6,7 +6,6 @@ const path = require('path');
 const session = require('express-session');
 const cors = require('cors');
 
-const connectDB = require('./server/dbconnection');
 
 const app = express();
 
@@ -18,8 +17,7 @@ app.use(morgan('tiny'));
 app.use(cors());
 
 
-// mongodb connection
-connectDB();
+
 
 // parse request to body-parser
 app.use(bodyparser.urlencoded({ extended: true }))
