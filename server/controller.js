@@ -6,7 +6,12 @@ var IGmsg = model.igmessagedb;
 var sendmail = require('./sendemail');
 const url = require('url');
 
+
+const connectDB = require('./dbconnection');
+
+
 exports.fbview = (req, res) => {
+    connectDB();
 
     if (!req.body) {
         res.status(400).send({ message: "Content can not be emtpy!" });
@@ -31,6 +36,7 @@ exports.fbview = (req, res) => {
 
 
 exports.fbmessage = (req, res) => {
+    connectDB();
     if (req.body) {
 
         let name = req.body.name ? req.body.name : 'Anonymous';
@@ -59,6 +65,7 @@ exports.fbmessage = (req, res) => {
 
 }
 exports.igview = (req, res) => {
+    connectDB();
 
     if (!req.body) {
         res.status(400).send({ message: "Content can not be emtpy!" });
@@ -83,6 +90,7 @@ exports.igview = (req, res) => {
 
 
 exports.igmessage = (req, res) => {
+    connectDB();
     if (req.body) {
         let name = req.body.name ? req.body.name : 'Anonymous';
         let message = req.body.message;
@@ -110,6 +118,7 @@ exports.igmessage = (req, res) => {
 
 }
 exports.getFBviews = (req, res) => {
+    connectDB();
     FBviews.find()
         .sort({ created_at: 1 })
         .then(views => {
@@ -120,6 +129,7 @@ exports.getFBviews = (req, res) => {
         })
 }
 exports.getIGviews = (req, res) => {
+    connectDB();
     IGviews.find()
         .sort({ created_at: 1 })
         .then(views => {
@@ -130,6 +140,7 @@ exports.getIGviews = (req, res) => {
         })
 }
 exports.getFBmsg = (req, res) => {
+    connectDB();
     FBmsg.find()
         .sort({ created_at: 1 })
         .then(msgs => {
@@ -140,6 +151,7 @@ exports.getFBmsg = (req, res) => {
         })
 }
 exports.getIGmsg = (req, res) => {
+    connectDB();
     IGmsg.find()
         .sort({ created_at: 1 })
         .then(msg => {
